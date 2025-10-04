@@ -2,10 +2,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/api",  // proxy se backend connect hoga
+  baseURL: import.meta.env.VITE_API_URL, // Use base URL from .env
   withCredentials: true, // taaki cookies (jwt token) bheji jaa sake
-  
 });
+
 api.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -13,4 +13,5 @@ api.interceptors.request.use((req) => {
   }
   return req;
 });
+
 export default api;
